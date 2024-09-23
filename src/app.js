@@ -6,6 +6,7 @@ import productsRouter from "./routes/products/productRoutes.js";
 import cartRouter from "./routes/cartItems/cartRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { corsOptions } from "./helper/corsOptions.js";
 
 const app = express(); //initialising express
 
@@ -17,9 +18,7 @@ connectdb();
 app.use(cookieParser());//middleware for parsing cookies
 app.use(morgan("dev"));// logs request to terminal
 app.use(express.json()); //body parsing middleware
-app.use(cors({ 
-  origin: '*',  //allowing all origins since i am using two different domains for frontend
-  credentials: true }));//allowing credentials
+app.use(cors(corsOptions));//allowing cross origin access
 
 //routes
 app.use("/api/", cartRouter) // routes related to cart
