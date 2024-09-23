@@ -53,7 +53,12 @@ cd ShoppyGlobe-Backend
 npm install
 ```
 
-4. Run the server
+4. Add `.env` file with environment variables
+
+`MongoDB_URL` is the URL of the MongoDB database.
+`JWT_SECRET` is the secret key used to sign and verify JWT tokens.
+
+5. Start the server
 
 ```bash
 npm start
