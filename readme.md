@@ -55,8 +55,14 @@ npm install
 
 4. Add `.env` file with environment variables
 
-`MongoDB_URL` is the URL of the MongoDB database.
-`JWT_SECRET` is the secret key used to sign and verify JWT tokens.
+The following environment variables must be set in the `.env` file:
+
+### `MongoDB_URL`
+The URL of the MongoDB database.
+
+### `JWT_SECRET`
+The secret key used to sign and verify JWT tokens.
+
 
 5. Start the server
 
@@ -66,33 +72,70 @@ npm start
 
 ## Usage
 
-Once the server is running, you can access it using the following URL: http://localhost:8000/api/
+### Endpoints
 
-In the frontend application, you can register or sign the user.
-Once the user is signed in you can add products to the cart. Please note to access the cart routes you need to be signed in or in postman or thunder client you need to provide the token as a cookie.
+Once the server is running, you can access the following endpoints:
 
-*To provide the token as a cookie in postman/thunder client, open the headers section and add the token as a cookie in the following manner: `authtoken=<your_token>` in the value field of cookie header*
+### Authentication
 
-Product routes are accessible to everyone since we do not require authentication to view the products.
+*   **Register:** `http://localhost:8000/api/user/register`
+*   **Sign in:** `http://localhost:8000/api/user/login`
 
+### Products
+
+*   **Get all products:** `http://localhost:8000/api/products`
+*   **Get a single product:** `http://localhost:8000/api/products/:productId`
+*   **Create a new product:** `http://localhost:8000/api/products`
+*   **Update a product:** `http://localhost:8000/api/products/:productId`
+*   **Delete a product:** `http://localhost:8000/api/products/:productId`
+
+### Cart
+
+*   **Get all items in the cart:** `http://localhost:8000/api/cart/items`
+*   **Add an item to the cart:** `http://localhost:8000/api/cart/item`
+*   **Update an item in the cart:** `http://localhost:8000/api/cart/items/:itemid`
+*   **Delete an item from the cart:** `http://localhost:8000/api/cart/items/:itemid`
+
+**Note:** To access the cart endpoints, you need to be signed in. In Postman or Thunder Client, you can provide the token as a cookie in the following manner: `authtoken=<your_token>` in the value field of the cookie header.
 ### Request Examples
 
 #### User routes
 
-- Sign up or Register: url: `http://localhost:8000/api/user/register`, method: POST, headers: none, body: JSON, Required fields: `email`, `firstName`, `lastName`, `password`
-- Login: url: `http://localhost:8000/api/user/signin`, method: POST, headers: none, body: JSON, Required fields: `email`, `password`
+### User routes
+
+#### Register
+
+- URL: `http://localhost:8000/api/user/register`
+- Method: `POST`
+- Headers: `none`
+- Body: `JSON`
+- Required fields: `email`, `firstName`, `lastName`, `password`
+
+#### Login
+
+- URL: `http://localhost:8000/api/user/signin`
+- Method: `POST`
+- Headers: `none`
+- Body: `JSON`
+- Required fields: `email`, `password`
 
 #### Product routes
 
-- Get all products: url: `http://localhost:8000/api/products`, method: GET, headers: none, body: none
-- Get a single product: url:`http://localhost:8000/api/products/:productId`, method: GET, headers: none, body: none, parameters: `prductId`
-- Create a new product: url:`http://localhost:8000/api/products` , method: POST, headers: none, body: JSON, Required fields: `title`, `description`, `price`, `image`
-- Update a product: url:`http://localhost:8000/api/products/:productid` , method: PUT, headers: none, body: JSON , params: `productid`, Required fields: The field that needs to be updated
-- Delete a product: url:`http://localhost:8000/api/products/:id`, method: DELETE, headers: none, body: none, parameters: `id`
+#### Product routes
+
+| Route | Method | Headers | Body | Parameters | Required fields |
+| --- | --- | --- | --- | --- | --- |
+| /api/products | GET | none | none | none | none |
+| /api/products/:productId | GET | none | none | productId | none |
+| /api/products | POST | none | JSON | none | title, description, price, image |
+| /api/products/:productId | PUT | none | JSON | productId | The field that needs to be updated |
+| /api/products/:id | DELETE | none | none | id | none |
 
 #### Cart routes
 
-- Get cart items of logged in user: url:`http://localhost:8000/api/cart/items`, method: GET, headers: `Cookie: authtoken=<your_token>`, body: none
-- Add product to cart: url:`http://localhost:8000/api/cart/item`, method: POST, headers: Cookie: `authtoken=<your_token>`, body: JSON, Required fields: `productId`
-- Update cart item: url:`http://localhost:8000/api/cart/items/:itemid`, method: PUT, headers: `Cookie: authtoken=<your_token>`, params: `itemid`, body: JSON, Required fields: `quantity`
-- Delete cart item: url:`http://localhost:8000/api/cart/items/:itemid`, method: DELETE, headers: `Cookie: authtoken=<your_token>`, body: none, params: `itemid`
+| Route | Method | Headers | Body | Parameters | Required fields |
+| --- | --- | --- | --- | --- | --- |
+| /api/cart/items | GET | Cookie: authtoken=<your_token> | none | none | none |
+| /api/cart/item | POST | Cookie: authtoken=<your_token> | JSON | none | productId |
+| /api/cart/items/:itemid | PUT | Cookie: authtoken=<your_token> | JSON | itemid | quantity |
+| /api/cart/items/:itemid | DELETE | Cookie: authtoken=<your_token> | none | itemid | none |
