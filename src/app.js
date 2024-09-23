@@ -17,7 +17,9 @@ connectdb();
 app.use(cookieParser());//middleware for parsing cookies
 app.use(morgan("dev"));// logs request to terminal
 app.use(express.json()); //body parsing middleware
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({ 
+  origin: '*',  //allowing all origins since i am using two different domains for frontend
+  credentials: true }));//allowing credentials
 
 //routes
 app.use("/api/", cartRouter) // routes related to cart
@@ -25,7 +27,7 @@ app.use("/api/", userRouter) // routes related to users
 app.use("/api/", productsRouter)//routes related to products
 
 app.get("/", (req, res)=>{
-  res.send("Hello");
+  res.send("Welconme to shoppyglobe backend read documentation at https://github.com/itsnileshgosavi/shoppyglobe-backend");
 })
 
 app.listen(8000, () => {

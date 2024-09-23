@@ -6,9 +6,18 @@ const cartItemSchema = new Schema({
       type: Number,
       required: true,
     },
-    title: String,
-    description: String,
-    price: Number,
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
     rating: Number,
     brand: String,
     dimensions: {
@@ -16,7 +25,10 @@ const cartItemSchema = new Schema({
       height: Number,
       depth: Number,
     },
-    thumbnail: String,
+    thumbnail:{
+      type: String,
+      required: true,
+    },
     warrantyInformation: String,
     returnPolicy: String,
     shipping: String,
@@ -33,6 +45,6 @@ const cartItemSchema = new Schema({
   },
 });
 
-const CartItemModel = mongoose.model("cart", cartItemSchema);
+const CartItemModel = mongoose.model("cartItem", cartItemSchema);
 
 export default CartItemModel;

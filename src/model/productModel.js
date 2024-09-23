@@ -17,8 +17,8 @@ const productSchema = new Schema({
     depth: Number,
   },
   thumbnail: String,
-  warrantyInformation: Number,
-  returnPolicy: Number,
+  warrantyInformation: String,
+  returnPolicy: String,
   shipping: String,
   weight: Number,
 });
