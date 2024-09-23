@@ -20,6 +20,12 @@ The application includes various routes to perform CRUD operations on the databa
 | POST /api/products | Create a new product |
 | PUT /api/products/:id | Update a product |
 | DELETE /api/products/:id | Delete a product |
+| GET /api/cart/items | Get all products |
+| POST /api/cart/item | add a single product to cart |
+| PUT /api/cart/items/:id | update a single product |
+| DELETE /api/cart/:id | Delete a single product from cart  |
+| POST /api/user/register | Register a user |
+| POST /api/user/signin | Sign in a user |
 
 ## Installation
 
@@ -30,11 +36,13 @@ The application includes various routes to perform CRUD operations on the databa
 - MongoDB
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/itsnileshgosavi/ShoppyGlobe-Backend.git
-```bash
+```
 
 2. Navigate to the cloned repository
+
 ```bash
 cd ShoppyGlobe-Backend
 ```
