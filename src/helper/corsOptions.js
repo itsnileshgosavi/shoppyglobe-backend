@@ -10,5 +10,7 @@ export const corsOptions = {
       callback(new Error('Not allowed by CORS'));  // Reject the request
     }
   },
-  credentials: true  // Allow credentials (cookies, HTTP authentication)
+  credentials: true,  // Allow credentials (cookies, HTTP authentication)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
