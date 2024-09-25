@@ -15,10 +15,10 @@ const app = express(); //initialising express
 connectdb();
 
 //middlewares
+app.use(cors(corsOptions));//allowing cross origin access
 app.use(cookieParser());//middleware for parsing cookies
 app.use(morgan("dev"));// logs request to terminal
 app.use(express.json()); //body parsing middleware
-app.use(cors(corsOptions));//allowing cross origin access
 
 //routes
 app.use("/api/", cartRouter) // routes related to cart
