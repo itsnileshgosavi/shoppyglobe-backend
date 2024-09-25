@@ -24,7 +24,8 @@ export const userSignin = async (req, res) => {
           httpOnly: false, //making cookie accessible by javascript on client
           secure: true, //this is to allow cookie to be sent over https
           sameSite: 'none', //allowing the cookie to be sent across different domains since i am using two different domains for frontend and backend
-          maxAge: 86400000 // cookie will expire after 24 hours
+          maxAge: 86400000,
+          domain:"nileshgosavi.tech", // cookie will expire after 24 hours
         });
        return res.status(200).json({ message: "user logged in", success: true, user: { id: user._id, firstName:user.firstName, lastName:user.lastName, email:user.email } });
       } else {
