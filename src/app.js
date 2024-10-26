@@ -7,6 +7,8 @@ import cartRouter from "./routes/cartItems/cartRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { corsOptions } from "./helper/corsOptions.js";
+import orderRouter from "./routes/orders/orderRoutes.js";
+import path from "path";
 
 const app = express(); //initialising express
 
@@ -15,18 +17,20 @@ const app = express(); //initialising express
 connectdb();
 
 //middlewares
-app.use(cors(corsOptions));//allowing cross origin access
+// app.use(cors(corsOptions));//allowing cross origin access
 app.use(cookieParser());//middleware for parsing cookies
 app.use(morgan("dev"));// logs request to terminal
 app.use(express.json()); //body parsing middleware
 
 //routes
+app.use(express.static(path.join(path.resolve(), './dist')));
 app.use("/api/", cartRouter) // routes related to cart
 app.use("/api/", userRouter) // routes related to users
 app.use("/api/", productsRouter)//routes related to products
+app.use("/api/", orderRouter); //routes related to orders
 
 app.get("/", (req, res)=>{
-  res.send("Welconme to shoppyglobe backend read documentation at https://github.com/itsnileshgosavi/shoppyglobe-backend");
+  res.sendFile(path.join(path.resolve(), './dist/index.html'));
 })
 
 app.listen(8000, () => {
