@@ -17,19 +17,7 @@ const app = express(); //initialising express
 connectdb();
 
 //middlewares
-// This code makes sure that any request that does not matches a static file
-// in the build folder, will just serve index.html. Client side routing is
-// going to make sure that the correct content will be loaded.
-app.use((req, res, next) => {
-  if (/(.ico|.js|.css|.jpg|.png|.map)$/i.test(req.path)) {
-      next();
-  } else {
-      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-      res.header('Expires', '-1');
-      res.header('Pragma', 'no-cache');
-      res.sendFile(path.join(path.resolve(), 'dist', 'index.html'));
-  }
-});
+
 
 // app.use(cors(corsOptions));//allowing cross origin access
 app.use(cookieParser());//middleware for parsing cookies
@@ -47,6 +35,20 @@ app.use("/api/", orderRouter); //routes related to orders
 app.get("/", (req, res)=>{
   res.sendFile(path.join(path.resolve(), './dist/index.html'));
 })
+
+// This code makes sure that any request that does not matches a static file
+// in the build folder, will just serve index.html. Client side routing is
+// going to make sure that the correct content will be loaded.
+app.use((req, res, next) => {
+  if (/\/api\/|(.ico|.js|.css|.jpg|.png|.map)$/i.test(req.path)) {
+      next();
+  } else {
+      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      res.header('Expires', '-1');
+      res.header('Pragma', 'no-cache');
+      res.sendFile(path.join(path.resolve(), 'dist', 'index.html'));
+  }
+});
 
 app.listen(8000, () => {
     console.log("server is running at http://localhost:8000");
