@@ -1,0 +1,1 @@
+import{j as e}from"./index-DrAFe7Km.js";const s=()=>e.jsx("div",{className:"flex justify-center items-center",children:e.jsx("div",{className:"animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-gray-900"})});export{s as S};
