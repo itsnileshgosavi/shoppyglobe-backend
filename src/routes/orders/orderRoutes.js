@@ -6,12 +6,12 @@ const orderRouter = express.Router();
 
 orderRouter.post("/order/place", tokenValidation, async(req, res) => {
     try {
-        const { fName, lName, email, address, phone, products, orderTotal, pincode } = req.body;
+        const { fname, lname, email, address, phone, products, orderTotal, pincode } = req.body;
         const user = req.user;
         const order = new orderModel({
             userId: user.id,
-            firstName: fName,
-            lastName: lName,
+            firstName: fname,
+            lastName: lname,
             email,
             address,
             phone,
